@@ -44,7 +44,7 @@ update_status ModuleRender::PreUpdate()
 	// TODO 7: Clear the screen to black before starting every frame
 	SDL_RenderClear(renderer);
 	// TODO 10: Blit our test texture to check functionality
-
+	Blit(App->textures->textures[0], 400, 0, NULL);
 	return update_status::UPDATE_CONTINUE;
 }
 

@@ -35,6 +35,7 @@ bool ModuleTextures::Init()
 		LOG("Could not initialize Image lib. IMG_Init: %s", IMG_GetError());
 		ret = false;
 	}
+
 	return ret;
 }
 
@@ -58,23 +59,23 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	// TODO 2: Load and image from a path (must be a png)
 	// and check for errors
 	SDL_Texture* ret = nullptr;
-	SDL_Surface* imageTest = IMG_Load(path);
+	SDL_Surface* surface = IMG_Load(path);
 	
-	if (imageTest == nullptr) {
+	if (surface == nullptr) {
 		LOG("There was an error loading the image: %s", path);
 	}
 	else {
 
 		// TODO 3: Once your have the SDL_surface*, you need to create
 		// a texture from it to return it (check for errors again)
-		ret = SDL_CreateTextureFromSurface(App->render->renderer, imageTest);
+		ret = SDL_CreateTextureFromSurface(App->render->renderer, surface);
 		if (ret == nullptr) {//the same as ret == NULL		
 			LOG("There was an error creating a texture for the image: %s", path);
 		}
 	}	
 	// TODO 4: Before leaving, remember to free the surface and
 	// add the texture to our own array so we can properly free them
-	SDL_FreeSurface(imageTest);
+	SDL_FreeSurface(surface);
 	textures[last_texture++] = ret;
 	if (last_texture >= MAX_TEXTURES) {
 		LOG("Texture array overflow");
